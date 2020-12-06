@@ -8,9 +8,6 @@
   type: github
   icon: 'fab fa-github-alt'
 -
-  type: twitter
-  icon: 'fab fa-twitter'
--
   type: email
   icon: 'fas fa-envelope'
   noblank: true            # open link in current tab
@@ -25,9 +22,14 @@
 #   icon: 'fab fa-mastodon'   # icons powered by <https://fontawesome.com/>
 #   url:  ''                  # Fill with your mastodon account page
 # -
-#   type: linkedin
-#   icon: 'fab fa-linkedin'   # icons powered by <https://fontawesome.com/>
-#   url:  ''                  # Fill with your Linkedin homepage
+  type: linkedin
+  icon: 'fab fa-linkedin'   # icons powered by <https://fontawesome.com/>
+  url:  'https://linkedin.com/gowtham-munukutla'                  # Fill with your Linkedin homepage
+-
+  type: instagram
+  icon: 'fab fa-instagram'   # icons powered by <https://fontawesome.com/>
+  url:  'https://www.instagram.com/gowthammunukutla/'                  # Fill with your Linkedin homepage
+
 # -
 #   type: stack-overflow
 #   icon: 'fab fa-stack-overflow'

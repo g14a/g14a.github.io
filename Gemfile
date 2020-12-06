@@ -11,6 +11,8 @@ group :jekyll_plugins do
   gem "jekyll-sitemap"
 end
 
+gem 'guard-jekyll'
+
 group :test do
   gem "html-proofer", "~> 3.16.0"
 end
