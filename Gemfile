@@ -12,6 +12,7 @@ group :jekyll_plugins do
 end
 
 gem 'guard-jekyll'
+gem 'jekyll-seo-tag'
 
 group :test do
   gem "html-proofer", "~> 3.16.0"
