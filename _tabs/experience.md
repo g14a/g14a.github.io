@@ -4,7 +4,7 @@ icon: fas fa-info
 order: 2
 ---
 
-## **Cloud Backend Developer Intern at [Atlan](atlan.com)** - **Jan to May 2020**
+## **Cloud Backend Developer Intern at [Atlan](https://atlan.com)** - **Jan to May 2020**
 
 #### Responsibilities include: <br>
     
