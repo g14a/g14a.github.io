@@ -5,6 +5,7 @@ date: 2020-11-28 11:33:00 +0800
 categories: [tutorials]
 comments: true
 tags: [Databases, Golang, Heroku]
+toc: true
 ---
 
 This is a quick article on how schema migrations are run beforing deploying your Go application(or any another app) on Heroku. I've myself faced some problems due to lack of proper documentation with the Go buildpack. A bunch of SO threads have helped me pave the correct path. So let's start.
@@ -15,7 +16,7 @@ This is a quick article on how schema migrations are run beforing deploying your
 
 That's it. Preferrably add ```// +heroku goVersion go1.15``` after declaring your module in ```go.mod``` to get the version you want. I write Go code usually but there would be buildpacks for other languages as well.(I'm hoping)
 
-I personally use [golang-migrate](https://github.com/golang-migrate/migrate) for handling schema migrations because it has support to a variety of databases out of the box and it can be used both as a binary as well as a Go library.
+I prefer [golang-migrate](https://github.com/golang-migrate/migrate) for handling database migrations since it supports a variety of databases, while being usable as a Linux binary or Go library.
 
 Add your migrations to the ```db/migrations``` path as specified by the library. Once that is done, create a shell script ```migration.sh``` and add the following code:
 
@@ -33,7 +34,9 @@ if [ $exit_status -ne 0 ]; then
 fi
 ```
 
-Although [golang-migrate](https://github.com/golang-migrate/migrate) provides support for all kinds of platforms, we use the Linux binaries as Heroku dynos are Linux containers. The above shell script gets the binary and stores it in the ```/tmp``` path to run it from. And you need your database URL in an environment variable which might already be set in your Heroku Config.
+Although [golang-migrate](https://github.com/golang-migrate/migrate) supports for all kinds of platforms, we use the Linux binary as Heroku dynos are Linux containers. The above shell script gets the binary and stores it in the ```/tmp``` path to run it from. And you need your database URL in an environment variable which might already be set in your Heroku Config. 
+
+The script performs a downward migration only if the upward migration exits with an `exit_status` other than `0`.
 
 Once this is done, go ahead and create a ```Procfile``` in your root directory(assuming you don't have one already) and add
 the release phase command.
