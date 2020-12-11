@@ -16,7 +16,7 @@ I come from a Java background. I've used them only for competitive programing wh
 
 I'll try my best to explain what interfaces in Go are, assuming you're five years old.
 
-![Why don't you explain this to me like I'm five?](https://media.giphy.com/media/WsNbxuFkLi3IuGI9NU/giphy-downsized.gif)
+<img src="https://media.giphy.com/media/WsNbxuFkLi3IuGI9NU/giphy-downsized.gif" width="300" height="250"/>
 
 Let's take an example of two things that float on water, oil and ice.
 
