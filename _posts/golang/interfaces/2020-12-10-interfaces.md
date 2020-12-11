@@ -5,7 +5,6 @@ date: 2020-12-11 9:50:00 -0530
 categories: [tutorials]
 tags: [golang, interfaces]
 toc: true
-permalink: /golang/interfaces
 ---
 
 ## Intro 
