@@ -238,7 +238,12 @@ func UserHandler(w http.ResponseWriter, r *http.Request)  {
     })
 
     for _, db := range dbs {
-        go InsertIntoDB(db, user)
+        go func(db DB) {
+            err := db.Insert(user)
+            if err != nil {
+                fmt.Println(err)
+            }
+        }(db)
     }
 }
 ```
@@ -277,3 +282,7 @@ Checkout this [list of all Go interfaces](https://sweetohm.net/article/go-interf
 
 ## Conclusion
 I hopefully transferred enough knowledge to you wonderful people about interfaces in Go. Let me know more about what I missed, and I will make sure to update this post so that you understand better. Afterall, all of us get to learn!
+
+I'm linking my [reddit post](https://www.reddit.com/r/golang/comments/kb7ema/how_i_learnt_to_use_go_interfaces/) and will periodically update this article based on suggestions the wonderful people of the [Reddit Go Community](https://www.reddit.com/r/golang) give me.
+
+Have a good day :)
