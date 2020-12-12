@@ -4,6 +4,8 @@ icon: fas fa-info
 order: 2
 ---
 
+## **Currently working at [Skuad](https://www.skuad.io/) building next generation talent platform**
+
 ## **Cloud Backend Developer Intern at [Atlan](https://atlan.com)** - **Jan to May 2020**
 
 #### Responsibilities include: <br>
