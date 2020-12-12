@@ -17,7 +17,7 @@ I'll try my best to explain what interfaces in Go are, assuming you're five year
 
 <img src="https://media.giphy.com/media/WsNbxuFkLi3IuGI9NU/giphy-downsized.gif" width="300" height="250"/>
 
-Let's take an example of two things that float on water, oil and ice.
+Let's take an example of two things that float on water like oil and ice.
 
 <img src="../../images/golang-interfaces/oilwater.png" width="60%">
 
