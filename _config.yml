@@ -195,14 +195,9 @@ jekyll-archives:
     category: category
     tag: tag
   permalinks:
-<<<<<<< HEAD
     tag: '/tags/:name/'
     category: '/categories/:name/'
 
 plugins:
     - jekyll-seo-tag
     - jekyll-sitemap
-=======
-    tag: /tags/:name/
-    category: /categories/:name/
->>>>>>> 6acd00a8965d136a8df34ebf7aaf2b563f1a445c
