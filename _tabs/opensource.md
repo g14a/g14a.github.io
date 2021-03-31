@@ -11,3 +11,6 @@ order: 2
 - Added support to show diff stats in PRs directly in the command line - [#3086](https://github.com/cli/cli/pull/3086) - Merged 🎉
 - Added support to search issues with all filters - [#3196](https://github.com/cli/cli/pull/3196) Merged 🎉
 - Added support to transfer issues to another repo- [#3268](https://github.com/cli/cli/pull/3268) Merged 🎉
+
+
+To know more about my work experience, check out my LinkedIn in the bottom left!
