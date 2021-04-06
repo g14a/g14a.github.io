@@ -3,7 +3,7 @@ title: Running schema migrations on Heroku
 author: Gowtham Munukutla
 date: 2020-11-28 11:33:00 +0800
 categories: [tutorials]
-tags: [Databases, Golang, Heroku]
+tags: [databases, golang, heroku]
 toc: true
 ---
 
