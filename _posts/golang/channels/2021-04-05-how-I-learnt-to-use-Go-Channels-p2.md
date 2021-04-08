@@ -45,3 +45,197 @@ We can see the difference between both of them here:
 |  value == 0 | value > 0  |
 | Synchronous i.e blocking  | Asynchronous until it reaches value |
 
+Let us create a buffered channel and try to communicate with the goroutine.
+
+```go
+package main
+
+import (
+    "fmt"
+    "math"
+)
+
+func main() {
+    ch := make(chan float64, 5)
+    go write(ch)
+
+    ch <- 10
+    ch <- 20
+    ch <- 30
+    ch <- 40
+    ch <- 50
+
+    fmt.Println("main exits")
+}
+
+func write(ch chan float64) {
+    for i := 0; i <= 5; i++ {
+        float := <- ch
+        fmt.Println(math.Log(float))
+    }
+}
+```
+
+The above program gives the following output:
+
+```bash
+main exits
+$ >
+```
+
+This is because we exactly gave the channel 5 values and it equals its capacity precisely.
+
+Now let's see what happens if we give it one more data element. Your main function would look like this:
+
+```go
+func main() {
+    ch := make(chan float64, 5)
+    go write(ch)
+
+    ch <- 10
+    ch <- 20
+    ch <- 30
+    ch <- 40
+    ch <- 50
+    ch <- 60
+
+    fmt.Println("main exits")
+}
+```
+
+This time you might get a variety of outputs like the following:
+
+```bash
+2.302585092994046
+2.995732273553991
+3.4011973816621555
+main exits
+$ >
+```
+
+```bash
+2.302585092994046
+2.995732273553991
+3.4011973816621555
+3.6888794541139363
+3.912023005428146
+4.0943445622221
+main exits
+$ >
+```
+
+```bash
+2.302585092994046
+main exits
+$ >
+```
+
+This happens because computation of `log` takes some time and it can sometimes depend
+on other applications running on your machine which take up CPU. For best results, the workaround is to apply a `time.Sleep(time.Second)` after sending in all data to the channel.
+
+Although we did not get the best results, we proved that goroutines don't block when the buffered channel gets more data than its capacity.
+
+Interestingly, running the above program with `GOMAXPROCS=1` gives all the results 99% of the time. This can happen because Go selects a processor in which the main function is already running and immediately assign the new goroutine to the same thread. When `GOMAXPROCS` isn't enabled, it CAN happen that the new goroutine might be assigned to some other system thread on another core. This can cause a little scheduling latency and might give out varied results.
+
+## Something Interesting
+
+Let us see if the goroutine and the main function run on the same system thread always.
+
+```go
+package main
+
+import (
+    "fmt"
+    "math"
+    "runtime"
+    "syscall"
+)
+
+func main() {
+
+    fmt.Printf("Main:System Thread Id:%d\n", syscall.Gettid())
+    fmt.Printf("GOMAXPROCS=%v\n", runtime.GOMAXPROCS(8))
+    ch := make(chan float64, 5)
+    go write(ch)
+
+    ch <- 10
+    ch <- 20
+    ch <- 30
+    ch <- 40
+    ch <- 50
+    ch <- 60
+
+    fmt.Printf("Main:System Thread Id:%d\n", syscall.Gettid())
+}
+
+func write(ch chan float64) {
+    fmt.Printf("Write:System Thread Id:%d\n", syscall.Gettid())
+    for i := 0; i < 6; i++ {
+        float := <- ch
+        fmt.Println(math.Log(float))
+    }
+}
+```
+
+We can get varied outputs again.
+
+```bash
+Main:System Thread Id:12
+GOMAXPROCS=8
+Write:System Thread Id:12
+2.302585092994046
+2.995732273553991
+3.4011973816621555
+3.6888794541139363
+3.912023005428146
+4.0943445622221
+Main:System Thread Id:14
+```
+
+We notice that the `write` goroutine is mapped to a thread with an id 12. And the main system thread runs on 14. And there is a chance that both of them run on the same thread too.
+
+## Reading from a buffered channel
+
+Buffered channels are readable even if their capacity isn't filled. Delivery of data is blocked until the capacity is full but not when you read from it.
+
+```go
+package main
+
+import (
+    "fmt"
+    "math"
+)
+
+func main() {
+    ch := make(chan float64, 3)
+
+    fmt.Println(len(ch), cap(ch))
+
+    ch <- 10
+    ch <- 20
+
+    fmt.Println(<-ch)
+    fmt.Println(<-ch)
+
+    fmt.Println(len(ch), cap(ch))
+}
+```
+
+This gives the output:
+
+```bash
+2 3 
+10
+20
+0 3
+$ >
+```
+
+We see that the buffer did not even reach its capacity, but it lets us read from it. We also try to understand the difference between the length and capacity of the channel here.
+
+The capacity of the channel doesn't change once declared in the `make` function. The `len` keeps changing as values are added and read from the buffer. We see that after we read both the values from the channel, the `len` becomes `0`.
+
+## Fun stuff
+
+Until now we've tried sending data into a channel in the main function, and reading it in a goroutine. Can we do the opposite? Absolutely.
+
