@@ -239,3 +239,55 @@ The capacity of the channel doesn't change once declared in the `make` function.
 
 Until now we've tried sending data into a channel in the main function, and reading it in a goroutine. Can we do the opposite? Absolutely.
 
+When we run the following program,
+
+```go
+package main
+
+import (
+    "fmt"
+)
+
+func main() {
+    ch := make(chan int, 3)
+    go send(ch)
+    for val := range ch {
+        fmt.Println(val, len(ch), cap(ch))
+    }
+}
+
+func send(ch chan int) {
+    for i := 0; i < 5; i++ {
+        ch <- i
+    }
+    close(ch)
+}
+```
+
+we get this:
+
+```bash
+0 3 3
+1 3 3
+2 2 3
+3 1 3
+4 0 3
+$ >
+```
+
+Notice how the length of the channel is `3` even after reading the first element `0`. This is because the element `3` is inserted immediately into the channel in the 4th iteration of the for loop. 
+
+## Key points learnt
+* An unbuffered channel contains only 1 item and it blocks all sends until there is a receiver.
+* Pushing data to a buffered channel doesn't block, unless the capacity of the buffer is completely filled.
+* You can read from buffered channels even if their capacity isn't filled.
+
+## Conclusion
+
+Hope you enjoyed the second part of the tutorial. In the next one we talk about Channel types.
+
+Check it out at [Part-3 Channel Types](https://g14a.github.io/posts/how-I-learnt-to-use-Go-Channels-p3/)
+
+Please reach out to me via email(or any social media linked down below) if you think I haven't covered something which you consider important.
+
+Thank you 😁
