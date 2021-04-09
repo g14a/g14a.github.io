@@ -1,5 +1,5 @@
 ---
-title: How I learnt Go Channels - Part 3 - Select & Types of Channels
+title: How I learnt Go Channels - Part 3 - Types of Channels & Select
 author: Gowtham Munukutla
 date: 2021-04-06 2:23:00 -0530
 categories: [tutorials]
@@ -14,6 +14,10 @@ In the earlier section [Part -2](https://g14a.github.io/posts/how-I-learnt-Go-Ch
 * What buffered channels are
 * Reading and writing to a buffered channel
 * Communicating with goroutines with buffered channels
+
+Have you ever thought of what would happen if you're on the receiver end of a channel and you accidentally close the channel? 
+
+<img src="https://media.giphy.com/media/wQzqIYHE15zMI/giphy.gif" width="340" height="250"/>
 
 As business and systems scale, there wouldn't be just one goroutine in the application. There might be hundreds of them or even thousands. And these goroutines might be communicating between themselves via multiple channels. And sometimes when one goroutine blocks, the others keep running. So it implies that if one channel is waiting for data to come in, other channels already have data in it and are in need of a receiver i.e they are ready to deliver data. So is there a way we can use whatever data is incoming from whichever channel instead of waiting for whether or not it has data? Absolutely.
 
