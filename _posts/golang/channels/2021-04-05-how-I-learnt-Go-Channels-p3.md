@@ -78,3 +78,63 @@ func hello(helloChan chan string) {
 ```
 
 Now the program always prints `World!` because the first case is blocking. We're sleeping for 100ms before sending data into `helloChan` and by then, `worldChan` already has data in it ready to be delivered. So the `select` statement always executes the second case.
+
+Let's try a send operation on a channel and see what happens:
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func main() {
+    helloChan := make(chan string)
+    worldChan := make(chan string)
+
+    go hello(helloChan)
+    go world(worldChan)
+
+    select {
+        case msg := <- helloChan:
+            fmt.Println(msg)
+        case worldChan <- "World":
+    }
+
+    time.Sleep(time.Millisecond*100)
+}
+
+func hello(helloChan chan string) {
+    helloChan <- "Hello"
+}
+
+func world(worldChan chan string) {
+    msg := <- worldChan
+    fmt.Println(msg)
+}
+```
+
+This can either print out `Hello` or `World!`. Now its upto you to try adding a blocking call by making one of the goroutines sleep for a while and explore all the combinations.
+
+Let's try adding a default case and see that it does something interesting. Our `select` statement becomes this:
+
+```go
+select {
+    case msg := <- helloChan:
+        fmt.Println(msg)
+    case worldChan <- "World":
+    default:
+        fmt.Println("default case")
+}
+```
+
+Now we see that the program always prints `default` case. But we've seen that default case gets executed only when all the cases cannot proceed. But they were proceeding in the previous example when the `default` case wasn't present. What is different now?
+
+In the third and fourth point when we introduced `select` we've seen that: 
+
+> If all channel operations are blocking, it waits until one of them isn't.
+
+> If none of the channel operations can proceed, and there is a `default` case, it executes the `default` case.
+
+So in the previous example, there is no `default` case. So `select` waited for atleast one of them to happen and executed that case immediately. But now since the `default` case exists, `select` doesn't wait anymore and proceeds to run the default case. Try adding a sleep just before select and see what happens for yourself.
