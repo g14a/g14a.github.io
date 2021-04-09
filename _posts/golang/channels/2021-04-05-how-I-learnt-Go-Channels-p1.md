@@ -223,6 +223,8 @@ $ >
 
 This occurs because the `for` loop keeps expecting values from the channel even after it reaches 10000. Just like there's an exit condition for a `for` loop i.e `i < 10e3` there's a `close(channelType)` function which tells Go that no more data will be sent into this channel once it is closed.
 
+A channel is always closed from the sender's end and it is never a good idea to do it on the receiver's end.
+
 Let's try to run this program after adding the `close` condition after the `for` loop.
 
 ```go
@@ -255,6 +257,8 @@ This gives the correct output which is:
 9999
 $ > 
 ```
+
+If data is sent into a closed channel, your goroutine panics. There is no receiver at all, even in the future, to take your data; so your goroutine panics. 
 
 We could easily loop over the channel in a different goroutine like the following as well:
 
