@@ -169,7 +169,7 @@ Sent John into channel
 $ >
 ```
 
-# Long Running Goroutines
+# **Long Running Goroutines**
 
 Let's simulate a long running goroutine which writes to a channel in a `for` loop and communicate with the main function. We just iterate over the channel like we iterate a slice in Go using `range`
 
@@ -278,7 +278,7 @@ The above program, prints just `0`s after printing from 1 to 1000000. This happe
 
 But if you iterate it with `range`, it doesn't print `0`s because `range` internally checks if the channel is closed and breaks the loop.
 
-# Tricks not covered
+# **Tricks not covered**
 
 * Reading from a channel returns two values by default out of which:
   * One is the actual data
@@ -291,7 +291,7 @@ if !ok {
 }
 ```
 
-## Conclusion
+# **Conclusion**
 
 Hope you enjoyed the first part of the tutorial. In the next one we talk about Buffered Channels.
 

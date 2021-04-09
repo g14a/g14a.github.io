@@ -7,7 +7,7 @@ tags: [golang, channels, concurrency]
 toc: true
 ---
 
-## A Tiny Recap
+## **A Tiny Recap**
 
 In the earlier section [Part -1](https://g14a.github.io/posts/how-I-learnt-to-use-Go-Channels-p1/) , we have learnt:
 
@@ -22,7 +22,7 @@ But when we tried different approaches and started playing around, we understand
 
 <span style="color:#FF0266"><b>An unbuffered channel contains only 1 item and it blocks all sends until there is a receiver.</b></span>
 
-## Introduction to Buffered channels
+## **Introduction to Buffered channels**
 
 We initialize a buffered channel by giving a second parameter to the holy `make` command. By default it takes in a `capacity` of `0` which is becomes an unbuffered channel.
 
@@ -137,7 +137,7 @@ Although we did not get the best results, we proved that goroutines don't block 
 
 Interestingly, running the above program with `GOMAXPROCS=1` gives all the results 99% of the time. This can happen because Go selects a processor in which the main function is already running and immediately assign the new goroutine to the same thread. When `GOMAXPROCS` isn't enabled, it CAN happen that the new goroutine might be assigned to some other system thread on another core. This can cause a little scheduling latency and might give out varied results.
 
-## Something Interesting
+## **Something Interesting**
 
 Let us see if the goroutine and the main function run on the same system thread always.
 
@@ -194,7 +194,7 @@ Main:System Thread Id:14
 
 We notice that the `write` goroutine is mapped to a thread with an id 12. And the main system thread runs on 14. And there is a chance that both of them run on the same thread too.
 
-## Reading from a buffered channel
+## **Reading from a buffered channel**
 
 Buffered channels are readable even if their capacity isn't filled. Delivery of data is blocked until the capacity is full but not when you read from it.
 
@@ -235,7 +235,7 @@ We see that the buffer did not even reach its capacity, but it lets us read from
 
 The capacity of the channel doesn't change once declared in the `make` function. The `len` keeps changing as values are added and read from the buffer. We see that after we read both the values from the channel, the `len` becomes `0`.
 
-## Fun stuff
+## **Fun stuff**
 
 Until now we've tried sending data into a channel in the main function, and reading it in a goroutine. Can we do the opposite? Absolutely.
 
@@ -277,12 +277,12 @@ $ >
 
 Notice how the length of the channel is `3` even after reading the first element `0`. This is because the element `3` is inserted immediately into the channel in the 4th iteration of the for loop. 
 
-## Key points learnt
+## **Key points learnt**
 * An unbuffered channel contains only 1 item and it blocks all sends until there is a receiver.
 * Pushing data to a buffered channel doesn't block, unless the capacity of the buffer is completely filled.
 * You can read from buffered channels even if their capacity isn't filled.
 
-## Conclusion
+## **Conclusion**
 
 Hope you enjoyed the second part of the tutorial. In the next one we talk about Channel types.
 
