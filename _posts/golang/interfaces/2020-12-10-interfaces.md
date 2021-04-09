@@ -1,5 +1,5 @@
 ---
-title: How I learnt to use Go Interfaces
+title: How I learnt Go Interfaces
 author: Gowtham Munukutla
 date: 2020-12-11 9:50:00 -0530
 categories: [tutorials]
