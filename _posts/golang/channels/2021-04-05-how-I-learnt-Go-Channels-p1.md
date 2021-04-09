@@ -308,7 +308,7 @@ if !ok {
 
 Hope you enjoyed the first part of the tutorial. In the next one we talk about Buffered Channels.
 
-Check it out at [Part-2 Buffered Channels](https://g14a.github.io/posts/how-I-learnt-to-use-Go-Channels-p2/)
+Check it out at [Part-2 Buffered Channels](https://g14a.github.io/posts/how-I-learnt-Go-Channels-p2/)
 
 Please reach out to me via email(or any social media linked down below) if you think I haven't covered something which you consider important.
 
