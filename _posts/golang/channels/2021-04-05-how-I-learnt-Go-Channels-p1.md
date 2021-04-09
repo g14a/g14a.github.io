@@ -126,7 +126,20 @@ exit status 2
 $ >
 ```
 
-This happens because there is no goroutine(the main func is also ultimately a goroutine) to read from the channel ```ch``` and the main function has exited. So all goroutines are sleep.
+This happens because there is no goroutine(the main func is also ultimately a goroutine) to read from the channel ```ch``` and the main function has exited. So all goroutines are asleep.
+
+You can understand the above better by the following picture.
+
+<p>
+    <img src="../../images/channels/blockinggophers.png" width="60%">
+    <em>Pic Credit: GopherCon UK</em>
+</p>
+
+In the above picture, the red buckets are data elements.
+
+* In the first case, the channel is ready with the data, but there's no receiver. So it blocks.
+* In the second case, the channel is ready with multiple data elements, but again there's no reciever. So it blocks.
+* The third and fourth case represent a receiver(s) sleeping because there is no incoming data. So it blocks. No incoming data means blocking.
 
 Now let's try reading from `ch`.
 ```go
