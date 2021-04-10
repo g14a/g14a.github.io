@@ -15,13 +15,132 @@ In the earlier section [Part -2](https://g14a.github.io/posts/how-I-learnt-Go-Ch
 * Reading and writing to a buffered channel
 * Communicating with goroutines with buffered channels
 
-Have you ever thought of what would happen if you're on the receiver end of a channel and you accidentally close the channel? 
+Have you ever thought of what would happen if you're on the receiver end of a channel and you accidentally close the channel? Or mistakenly try writing on a receiver end or reading from a sender end?
 
 <img src="https://media.giphy.com/media/wQzqIYHE15zMI/giphy.gif" width="340" height="250"/>
 
+To avoid these accidental errors channels provide a better syntax to indicate whether a channel is just for reading or writing.
+
+## **Read and Write Channels**
+
+First let's try closing a channel on the receiver's end.
+
+```go
+package main
+
+import (
+    "fmt"
+)
+
+func main() {
+    ch := make(chan int, 3)
+
+    go send(ch)
+
+    close(ch)
+
+    for {
+        val, ok := <- ch
+        if ok {
+            fmt.Println(val)
+        }
+    }
+}
+
+func send(ch chan int) {
+    for i := 0; i < 5; i++ {
+        ch <- i
+    }
+}
+```
+
+When we run the above program, we get the following error:
+
+```bash
+panic: send on closed channel
+
+goroutine 6 [running]:
+main.send(0xc000018080)
+        /Users/g14a/tutorials/rate-limit/main.go:59 +0x45
+created by main.main
+        /Users/g14a/tutorials/rate-limit/main.go:46 +0x5c
+exit status 2
+```
+
+The error is self explanatory, we're trying to send into a channel which has been closed by the receiver. Now how do we restrict a receiver from closing a channel but not the sender? By passing the `<-` operator while initializing channels or when passing them. 
+
+Let's pass the channel to the `send` function as `ch chan <- int` and seperate the reading of the channel into another function.
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func main() {
+    ch := make(chan int, 3)
+
+    go send(ch)
+    go read(ch)
+
+    time.Sleep(time.Millisecond * 100)
+}
+
+func send(ch chan<- int) {
+    for i := 0; i < 5; i++ {
+        ch <- i
+    }
+}
+
+func read(ch <-chan int) {
+    for {
+        val, ok := <-ch
+        if ok {
+            fmt.Println(val)
+        }
+    }
+}
+```
+
+Notice how the parameters of `send` and `read` have `ch chan<- int` and `ch <-chan int` respectively. The syntax means that `send` only writes to a channel and `read` only reads from a channel.
+
+Now even if you try to close the channel in the `read` function before the `for` loop starts, it throws a syntax error like this.
+
+```bash
+# command-line-arguments
+./main.go:60:7: invalid operation: close(ch) (cannot close receive-only channel)
+$ >
+```
+
+Try writing into a channel in `read` now. And then try reading from the channel in the `send` function and see the output for yourself.
+
+```go
+func read(ch <-chan int) {
+    ch <- 10
+    for {
+        val, ok := <-ch
+        if ok {
+            fmt.Println(val)
+        }
+    }
+}
+```
+
+It again throws a syntax error:
+
+```bash
+# command-line-arguments
+./main.go:60:5: invalid operation: ch <- 10 (send to receive-only type <-chan int)
+$ >
+```
+
+Now that we've understood the types of channels, lets move forward.
+
 As business and systems scale, there wouldn't be just one goroutine in the application. There might be hundreds of them or even thousands. And these goroutines might be communicating between themselves via multiple channels. And sometimes when one goroutine blocks, the others keep running. So it implies that if one channel is waiting for data to come in, other channels already have data in it and are in need of a receiver i.e they are ready to deliver data. So is there a way we can use whatever data is incoming from whichever channel instead of waiting for whether or not it has data? Absolutely.
 
-# **Select**
+## **Select**
 
 The `select` keyword lets you get values out of simultaneously running goroutines. It is like a `switch` statement but for channel operations. There's also a `default` case in `select` just like in a `switch` statement.
 
@@ -142,3 +261,109 @@ In the third and fourth point when we introduced `select` we've seen that:
 > If none of the channel operations can proceed, and there is a `default` case, it executes the `default` case.
 
 So in the previous example, there is no `default` case. So `select` waited for atleast one of them to happen and executed that case immediately. But now since the `default` case exists, `select` doesn't wait anymore and proceeds to run the default case. Try adding a sleep just before select and see what happens for yourself.
+
+Let's see a real use case of `select`.
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+    helloChan := make(chan string, 5)
+    worldChan := make(chan string, 5)
+
+    go hello(helloChan)
+    go world(worldChan)
+
+    for {
+        start := time.Now()
+        fmt.Println(<-helloChan)
+        fmt.Println(<-worldChan)
+        fmt.Println(time.Since(start))
+    }
+}
+
+func hello(helloChan chan<- string) {
+    for {
+        time.Sleep(time.Second*1)
+        helloChan <- "Hello"
+    }
+}
+
+func world(worldChan chan<- string) {
+    for {
+        time.Sleep(time.Millisecond*500)
+        worldChan <- "World!"
+    }
+}
+```
+
+When we run this we get the following output:
+
+```bash
+Hello
+World!
+1.002727246s
+Hello
+World!
+1.002881771s
+Hello
+World!
+1.003041016s
+Hello
+World!
+1.004952019s
+...
+$ >
+```
+
+We see that every 1 second, we get both `Hello` and `World!` gets printed. But that's not what we need. We need `World!` to be printed twice every one second because we're waiting only 500ms before sending data into `worldChan`.
+
+So finally, by the end of 1 sec, we need `Hello` to be printed once, and `World!` to be printed twice. But this doesn't happen because, the read at line no. 17 i.e `<-helloChan` is a blocking one. It blocks until the one second gets over at line no. 25, and then it proceeds. Since it blocks, `<-worldChan` doesn't get called.
+
+Now lets replace the `for` loop with a for-select loop.
+
+```go
+for {
+    select {
+    case msg := <-helloChan:
+        fmt.Println(msg)
+    case msg := <-worldChan:
+        fmt.Println(msg)
+    }
+}
+```
+
+Now when we run this, we get the desired output:
+
+```bash
+World!
+Hello
+World!
+World!
+Hello
+World!
+World!
+Hello
+World!
+...
+$ >
+```
+
+The control flow can be understood better by the following picture.
+
+<p>
+    <img src="../../images/channels/select.png" width="60%">
+</p>
+
+## **Conclusion**
+
+Hope you enjoyed the third part of the tutorial.
+
+Please reach out to me via email(or any social media linked down below) if you think I haven't covered something which you consider important.
+
+Thank you 😁

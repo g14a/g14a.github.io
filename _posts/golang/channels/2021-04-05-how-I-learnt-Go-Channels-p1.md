@@ -271,23 +271,23 @@ import (
 )
 
 func main() {
-	ch1 := make(chan int)
-	go write(ch1)
-	go read(ch1)
-	time.Sleep(time.Second)
+    ch1 := make(chan int)
+    go write(ch1)
+    go read(ch1)
+    time.Sleep(time.Second)
 }
 
 func read(ch chan int) {
-	for {
-		fmt.Println(<-ch)
-	}
+    for {
+        fmt.Println(<-ch)
+    }
 }
 
 func write(ch chan int) {
-	for i := 0; i < 10e5; i++ {
-		ch <- i
-	}
-	close(ch)
+    for i := 0; i < 10e5; i++ {
+        ch <- i
+    }
+    close(ch)
 }
 ```
 
