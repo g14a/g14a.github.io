@@ -1,6 +1,6 @@
 ---
-title: How I learnt Go Channels - Part 3 -Read/Write Channels & Select
-author: Gowtham Munukutla
+title: How I learnt Go Channels - Part 3 - Read/Write Channels & Select
+author: g14a
 date: 2021-04-10 2:23:00 -0530
 categories: [tutorials]
 tags: [golang, channels, concurrency]
@@ -359,6 +359,122 @@ The control flow can be understood better by the following picture.
 <p>
     <img src="../../images/channels/select.png" width="60%">
 </p>
+
+## **Timeouts in channels**
+
+In a HTTP environment, we talk about request timeouts. Where, if a request takes more than a certain period of time, we return a `408`. Similarly we have something in channels where if a channel operation takes more than a certain period, we execute something.
+
+You can imagine the usage of a timeout in a channel, where after time `t`, we send a message onto the channel saying "Hey, its time we did something else instead of waiting."
+
+A basic timeout implementation can be done by the following
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+    helloChan := make(chan string, 5)
+    worldChan := make(chan string, 5)
+    timeoutChan := make(chan bool, 1)
+
+    go hello(helloChan)
+    go world(worldChan)
+
+    go func() {
+        time.Sleep(time.Second*3)
+        timeoutChan <- true
+    }()
+
+    for {
+        select {
+        case msg := <-helloChan:
+            fmt.Println(msg)
+        case msg := <-worldChan:
+            fmt.Println(msg)
+        case <-timeoutChan:
+            fmt.Println("It has been 3 seconds. Timeout!")
+        }
+    }
+}
+```
+
+When you run this, the program prints `It has been 3 seconds. Timeout!` every three seconds.
+
+Try blocking the `hello` and `world` functions for more than 3 seconds each, and add a return in the timeout case.
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func main() {
+    helloChan := make(chan string, 5)
+    worldChan := make(chan string, 5)
+    timeoutChan := make(chan bool, 1)
+
+    go hello(helloChan)
+    go world(worldChan)
+
+    go func() {
+        time.Sleep(time.Second*3)
+        timeoutChan <- true
+    }()
+
+    for {
+        select {
+        case msg := <-helloChan:
+            fmt.Println(msg)
+        case msg := <-worldChan:
+            fmt.Println(msg)
+        case <-timeoutChan:
+            fmt.Println("It has been 3 seconds. Timeout!")
+            return
+        }
+    }
+}
+
+func hello(helloChan chan<- string) {
+    for {
+        time.Sleep(time.Second*5)
+        helloChan <- "Hello"
+    }
+}
+
+func world(worldChan chan<- string) {
+    for {
+        time.Sleep(time.Second*5)
+        worldChan <- "World!"
+    }
+}
+```
+Try running this and see the output for yourself.
+
+We used the `timeoutChan` for demonstration purposes but Go has something neat exactly for this functionality where we don't have to make our own timeout channels. It's the `time.After()` function that returns a channel and sends on it, after a certain period of time.
+
+[https://golang.org/pkg/time/#After](https://golang.org/pkg/time/#After)
+
+The above example can be converted to the following and that's all we have to do.
+
+```go
+for {
+    select {
+    case msg := <-helloChan:
+        fmt.Println(msg)
+    case msg := <-worldChan:
+        fmt.Println(msg)
+    case <-time.After(time.Second*3):
+        fmt.Println("It has been 3 seconds. Timeout!")
+        return
+    }
+}
+```
 
 ## **Conclusion**
 

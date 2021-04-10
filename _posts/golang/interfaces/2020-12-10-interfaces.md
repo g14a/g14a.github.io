@@ -1,6 +1,6 @@
 ---
 title: How I learnt Go Interfaces
-author: Gowtham Munukutla
+author: g14a
 date: 2020-12-11 9:50:00 -0530
 categories: [tutorials]
 tags: [golang, interfaces]
