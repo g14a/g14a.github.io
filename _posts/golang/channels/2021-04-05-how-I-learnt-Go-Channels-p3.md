@@ -1,7 +1,7 @@
 ---
 title: How I learnt Go Channels - Part 3 - Types of Channels & Select
 author: Gowtham Munukutla
-date: 2021-04-06 2:23:00 -0530
+date: 2021-04-10 2:23:00 -0530
 categories: [tutorials]
 tags: [golang, channels, concurrency]
 toc: true

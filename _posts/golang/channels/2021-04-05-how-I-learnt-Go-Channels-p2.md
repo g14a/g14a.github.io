@@ -1,7 +1,7 @@
 ---
 title: How I learnt Go Channels - Part 2 - Buffered Channels
 author: Gowtham Munukutla
-date: 2021-04-06 2:23:00 -0530
+date: 2021-04-08 2:23:00 -0530
 categories: [tutorials]
 tags: [golang, channels, concurrency]
 toc: true
