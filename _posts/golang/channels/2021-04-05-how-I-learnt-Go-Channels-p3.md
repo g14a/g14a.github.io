@@ -19,7 +19,7 @@ Have you ever thought of what would happen if you're on the receiver end of a ch
 
 <img src="https://media.giphy.com/media/wQzqIYHE15zMI/giphy.gif" width="340" height="250"/>
 
-To avoid these accidental errors channels provide a better syntax to indicate whether a channel is just for reading or writing.
+To avoid these accidental errors, channels provide a better syntax to indicate whether a channel is just for reading or writing.
 
 ## **Read and Write Channels**
 
@@ -136,9 +136,9 @@ It again throws a syntax error:
 $ >
 ```
 
-Now that we've understood the types of channels, lets move forward.
+Now that we've understood the read/write channels and how we can avoid pitfalls and errors, lets move forward.
 
-As business and systems scale, there wouldn't be just one goroutine in the application. There might be hundreds of them or even thousands. And these goroutines might be communicating between themselves via multiple channels. And sometimes when one goroutine blocks, the others keep running. So it implies that if one channel is waiting for data to come in, other channels already have data in it and are in need of a receiver i.e they are ready to deliver data. So is there a way we can use whatever data is incoming from whichever channel instead of waiting for whether or not it has data? Absolutely.
+As business and systems scale, there wouldn't be just one goroutine in the application. There might be hundreds of them or even thousands. And these goroutines might be communicating between themselves via multiple channels. And sometimes when one goroutine blocks, the others keep running. So it implies that if one channel is waiting for data to come in, other channels already have data in it and are in need of a receiver i.e they are ready to deliver data. So is there a way we can use whatever data is incoming from whichever channel instead of waiting for whether or not the others have data? Absolutely.
 
 ## **Select**
 
@@ -153,7 +153,7 @@ The `select` statement does the following:
 
 The `select` keyword is generally paired with the `for` loop in Go. We either loop infinitely if we have no clue about how much data we get into our channels, or in a `for range` loop.
 
-Let's see how `select` works in the following program. We initialize two unbuffered channels `helloChan` and `worldChan` and pass data into it in two seperate goroutines.
+Let's see how `select` works in the following program. We initialize two unbuffered channels `helloChan` and `worldChan` and pass data into it in two seperate goroutines. Notice how we didn't use a `for` loop here because we know that only one data element is going to be received by the channel.
 
 ```go
 package main
@@ -189,9 +189,9 @@ func world(worldChan chan string) {
 }
 ```
 
-Upon running several times, we see with `Hello` or `World!` in the output. This is because both of the channel operations at line 16 and 18 are non blocking. So any one of them is selected at random.
+Upon running several times, we see `Hello` or `World!` in the output. This is because both of the channel operations at line 16 and 18 are non blocking. So any one of them is selected at random.
 
-Now let's try blocking one of them by adding a `time.Sleep` before sending data into `helloChan`. Out `hello` functions becomes this.
+Now let's try blocking one of them by adding a `time.Sleep` before sending data into `helloChan`. Our `hello` functions becomes this.
 
 ```go
 func hello(helloChan chan string) {
@@ -238,9 +238,9 @@ func world(worldChan chan string) {
 }
 ```
 
-This can either print out `Hello` or `World!`. Now its upto you to try adding a blocking call by making one of the goroutines sleep for a while and explore all the combinations.
+This can either print out `Hello` or `World!`. Now its upto you, to try adding a blocking call by making one of the goroutines sleep for a while and explore all the combinations.
 
-Let's try adding a default case and see that it does something interesting. Our `select` statement becomes this:
+Let's try adding a default case and we see that it does something interesting. Our `select` statement becomes this:
 
 ```go
 select {
@@ -254,13 +254,13 @@ select {
 
 Now we see that the program always prints `default` case. But we've seen that default case gets executed only when all the cases cannot proceed. But they were proceeding in the previous example when the `default` case wasn't present. What is different now?
 
-In the third and fourth point when we introduced `select` we've seen that: 
+In the third and fourth point of our `select` introduction we've seen that: 
 
 > If all channel operations are blocking, it waits until one of them isn't.
 
 > If none of the channel operations can proceed, and there is a `default` case, it executes the `default` case.
 
-So in the previous example, there is no `default` case. So `select` waited for atleast one of them to happen and executed that case immediately. But now since the `default` case exists, `select` doesn't wait anymore and proceeds to run the default case. Try adding a sleep just before select and see what happens for yourself.
+So in the previous example, there is no `default` case. So `select` waited for atleast one of them to happen and executed that case immediately. But now since the `default` case exists, `select` doesn't wait anymore and proceeds to run the default case. Try adding a sleep just before select and see what happens for yourself. That's an exercise for you.
 
 Let's see a real use case of `select`.
 
