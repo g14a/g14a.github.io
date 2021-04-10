@@ -284,9 +284,9 @@ Notice how the length of the channel is `3` even after reading the first element
 
 ## **Conclusion**
 
-Hope you enjoyed the second part of the tutorial. In the next one we talk about Channel types and Select.
+Hope you enjoyed the second part of the tutorial. In the next one we talk about Read/Write Channels and Select.
 
-Check it out at [Part-3 Channel Types](https://g14a.github.io/posts/how-I-learnt-Go-Channels-p3/)
+Check it out at [Part-3 Read/Write Channels & Select](https://g14a.github.io/posts/how-I-learnt-Go-Channels-p3/)
 
 Please reach out to me via email(or any social media linked down below) if you think I haven't covered something which you consider important.
 

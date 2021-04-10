@@ -1,5 +1,5 @@
 ---
-title: How I learnt Go Channels - Part 3 - Types of Channels & Select
+title: How I learnt Go Channels - Part 3 -Read/Write Channels & Select
 author: Gowtham Munukutla
 date: 2021-04-10 2:23:00 -0530
 categories: [tutorials]
