@@ -276,7 +276,7 @@ func main() {
     go read(ch1)
     time.Sleep(time.Second)
 }
-
+<>
 func read(ch chan int) {
     for {
         fmt.Println(<-ch)
