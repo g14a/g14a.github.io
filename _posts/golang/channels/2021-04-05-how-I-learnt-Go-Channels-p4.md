@@ -25,6 +25,8 @@ In this exercise we do a little image manipulation using the following Go librar
 
 to manipulate our images. We take a large dataset of images of size 3k, and apply changes to each image and save them in a different directory. The task is simple, however implementing it is where we are going to be at.
 
+Find the dataset here - [Image Dataset](http://datasets.cvc.uab.es/rrc/DocVQA/train.tar.gz). It contains 10k images but we're going to work on the first 3k for the scope of this tutorial. You can always extend the program to process all of them and explore the concurrency.
+
 The flow of manipulation is going to be like the following:
 
 * Read an image
