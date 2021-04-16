@@ -239,4 +239,14 @@ Time elapsed 2m37.824414114s
 ./img-proc  1584.74s user 11.74s system 1008% cpu 2:38.37 total
 ```
 
-Oops, it didn't get any better! But we can see that the CPU time came down from 1058% to 1008% so that counts I guess?
+Oops, it didn't get any better! But we can see that the CPU time came down from 1058% to 1008% so that counts I guess? Well we tried our best :) Let me know how I can make this better.
+
+We end this section here realizing that we have made a task which took around 20 minutes in its serial version faster by almost 7 times just by implementing channels and decreasing redundant memory allocations.
+
+## **Conclusion**
+
+Hope you enjoyed the full exercise and how we tried optimising it.
+
+Please reach out to me via email(or any social media linked down below) if you think I haven’t covered something which you consider important.
+
+Thank you 😁

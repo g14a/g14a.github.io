@@ -209,7 +209,7 @@ The flow of the program can be better understood by the following illustration:
 When you run the above program, we see the following output:
 
 ```bash
-$ > time ./rate-limit
+$ > time ./img-proc
 Brightness of  /Users/g14a/Downloads/train/documents/1.png  changed by 0.25
 Contrast of  /Users/g14a/Downloads/train/documents/1.png  changed by 0.25
 Brightness of  /Users/g14a/Downloads/train/documents/2.png  changed by 0.25
@@ -222,7 +222,7 @@ Brightness of  /Users/g14a/Downloads/train/documents/2999.png  changed by 0.25
 Contrast of  /Users/g14a/Downloads/train/documents/2999.png  changed by 0.25
 Time elapsed 3m34.121020904s
 2021/04/15 18:27:23 profile: cpu profiling disabled, cpu.pprof
-./rate-limit  2235.90s user 25.88s system 1054% cpu 3:34.45 total
+./img-proc  2235.90s user 25.88s system 1054% cpu 3:34.45 total
 $ >
 ```
 
@@ -259,7 +259,7 @@ func main() {
 We see that the serial version takes around 19 and a half minutes to process the 3000 images.
 
 ```bash
-$ > time ./rate-limit
+$ > time ./img-proc
 Brightness of  /Users/g14a/Downloads/train/documents/1.png  changed by 0.25
 Contrast of  /Users/g14a/Downloads/train/documents/1.png  changed by 0.25
 Brightness of  /Users/g14a/Downloads/train/documents/2.png  changed by 0.25
@@ -271,7 +271,7 @@ Contrast of  /Users/g14a/Downloads/train/documents/2998.png  changed by 0.25
 Brightness of  /Users/g14a/Downloads/train/documents/2999.png  changed by 0.25
 Contrast of  /Users/g14a/Downloads/train/documents/2999.png  changed by 0.25
 Time elapsed 19m39.104002641s
-./rate-limit  1447.34s user 45.19s system 126% cpu 19:39.62 total
+./img-proc  1447.34s user 45.19s system 126% cpu 19:39.62 total
 $ >
 ```
 

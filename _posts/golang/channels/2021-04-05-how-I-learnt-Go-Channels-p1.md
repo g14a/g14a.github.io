@@ -121,7 +121,7 @@ fatal error: all goroutines are asleep - deadlock!
 
 goroutine 1 [chan send]:
 main.main()
-        /Users/g14a/tutorials/rate-limit/main.go:6 +0x50
+        /Users/g14a/tutorials/img-proc/main.go:6 +0x50
 exit status 2
 $ >
 ```

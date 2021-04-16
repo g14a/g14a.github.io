@@ -61,9 +61,9 @@ panic: send on closed channel
 
 goroutine 6 [running]:
 main.send(0xc000018080)
-        /Users/g14a/tutorials/rate-limit/main.go:59 +0x45
+        /Users/g14a/tutorials/img-proc/main.go:59 +0x45
 created by main.main
-        /Users/g14a/tutorials/rate-limit/main.go:46 +0x5c
+        /Users/g14a/tutorials/img-proc/main.go:46 +0x5c
 exit status 2
 ```
 
