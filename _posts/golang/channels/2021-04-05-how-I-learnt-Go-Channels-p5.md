@@ -1,7 +1,7 @@
 ---
 title: How I learnt Go Channels - Part 4 - Image Processing with Channels - Part 2
 author: g14a
-date: 2021-04-16 7:30:00 -0530
+date: 2021-04-16 3:30:00 -0530
 categories: [tutorials]
 tags: [golang, channels, concurrency, exercise]
 toc: true
