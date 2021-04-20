@@ -171,6 +171,15 @@ sass:
   sass_dir: /assets/css
   style: compressed
 
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  profile: false
+  blanklines: false
+  ignore:
+    envs: [development]
+
 exclude:
   - vendor
   - Gemfile.lock
