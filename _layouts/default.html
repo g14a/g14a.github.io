@@ -17,6 +17,11 @@ layout: compress
 
 <html lang="{{ site.lang | split: "_" | first | default: "en" }}" {{ prefer_mode }}>
 
+  <head>
+    <meta charset="utf-8">
+    {% seo %}
+  </head>
+
   {% include head.html %}
 
   <body data-spy="scroll" data-target="#toc">
