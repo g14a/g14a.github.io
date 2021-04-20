@@ -1,5 +1,5 @@
 ---
-title: How I learnt Go Channels - Part 3 - Read/Write Channels & Select
+title: Using Go Channels - Part 3 - Read/Write Channels & Select
 author: g14a
 date: 2021-04-10 2:23:00 -0530
 categories: [tutorials]
@@ -9,7 +9,7 @@ toc: true
 
 ## **A Tiny recap**
 
-In the earlier section [Part -2](https://g14a.github.io/posts/how-I-learnt-Go-Channels-p2/) , we have learnt:
+In the earlier section [Part -2](https://g14a.github.io/posts/using-Go-Channels-p2/) , we have learnt:
 
 * What buffered channels are
 * Reading and writing to a buffered channel
@@ -481,7 +481,7 @@ for {
 Hope you enjoyed the third part of the tutorial.
 In the next one we see a real world example of how we use channels.
 
-Check it out at [Part-4 Image Processing with channels](https://g14a.github.io/posts/how-I-learnt-Go-Channels-p3/)
+Check it out at [Part-4 Image Processing with channels](https://g14a.github.io/posts/using-Go-Channels-p3/)
 
 
 Please reach out to me via email(or any social media linked down below) if you think I haven't covered something which you consider important.

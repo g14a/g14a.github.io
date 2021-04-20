@@ -1,5 +1,5 @@
 ---
-title: How I learnt Go Channels - Part 2 - Buffered Channels
+title: Using Go Channels - Part 2 - Buffered Channels
 author: g14a
 date: 2021-04-08 2:23:00 -0530
 categories: [tutorials]
@@ -9,7 +9,7 @@ toc: true
 
 ## **A Tiny Recap**
 
-In the earlier section [Part -1](https://g14a.github.io/posts/how-I-learnt-Go-Channels-p1/) , we have learnt:
+In the earlier section [Part -1](https://g14a.github.io/posts/using-Go-Channels-p1/) , we have learnt:
 
 * What channels are
 * How we initialize them
@@ -286,7 +286,7 @@ Notice how the length of the channel is `3` even after reading the first element
 
 Hope you enjoyed the second part of the tutorial. In the next one we talk about Read/Write Channels and Select.
 
-Check it out at [Part-3 Read/Write Channels & Select](https://g14a.github.io/posts/how-I-learnt-Go-Channels-p3/)
+Check it out at [Part-3 Read/Write Channels & Select](https://g14a.github.io/posts/using-Go-Channels-p3/)
 
 Please reach out to me via email(or any social media linked down below) if you think I haven't covered something which you consider important.
 

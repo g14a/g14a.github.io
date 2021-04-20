@@ -1,5 +1,5 @@
 ---
-title: How I learnt Go Channels - Part 4 - Image Processing with Channels
+title: Using Go Channels - Part 4 - Image Processing with Channels
 author: g14a
 date: 2021-04-15 7:30:00 -0530
 categories: [tutorials]
@@ -9,7 +9,7 @@ toc: true
 
 ## **A Tiny Recap**
 
-In the earlier section [Part - 3](https://g14a.github.io/posts/how-I-learnt-Go-Channels-p3/) , we have learnt:
+In the earlier section [Part - 3](https://g14a.github.io/posts/using-Go-Channels-p3/) , we have learnt:
 
 * What read and write specific channels are
 * How we use select in the context of goroutines
@@ -287,7 +287,7 @@ Just by using basic channels and goroutines we've managed to speed up the task b
 
 Hope you enjoyed this exercise. In the next one we see if we can optimise this a little bit more and see what we can come up with.
 
-Check it out at [Part-4 Image Processing with channels - 2](https://g14a.github.io/posts/how-I-learnt-Go-Channels-p5/)
+Check it out at [Part-4 Image Processing with channels - 2](https://g14a.github.io/posts/using-Go-Channels-p5/)
 
 Please reach out to me via email(or any social media linked down below) if you think I haven’t covered something which you consider important.
 

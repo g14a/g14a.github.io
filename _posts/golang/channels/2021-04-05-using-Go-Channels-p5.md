@@ -1,5 +1,5 @@
 ---
-title: How I learnt Go Channels - Part 4 - Image Processing with Channels - Part 2
+title: Using Go Channels - Part 4 - Image Processing with Channels - Part 2
 author: g14a
 date: 2021-04-16 3:30:00 -0530
 categories: [tutorials]
@@ -9,7 +9,7 @@ toc: true
 
 ## **A Tiny Recap**
 
-In the earlier section [Part - 4](https://g14a.github.io/posts/how-I-learnt-Go-Channels-p4/), we have seen the serial and parallel versions of our image processing program.
+In the earlier section [Part - 4](https://g14a.github.io/posts/using-Go-Channels-p4/), we have seen the serial and parallel versions of our image processing program.
 
 Now let us see if we can make our parallel version even better.
 
