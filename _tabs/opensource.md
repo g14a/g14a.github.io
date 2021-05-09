@@ -10,7 +10,7 @@ order: 2
 - Fix bugs in rendering of binary files in gists - [#3042](https://github.com/cli/cli/pull/3042) - Merged 🎉
 - Added support to show diff stats in PRs directly in the command line - [#3086](https://github.com/cli/cli/pull/3086) - Merged 🎉
 - Added support to search issues with all filters - [#3196](https://github.com/cli/cli/pull/3196) Merged 🎉
-- Added support to transfer issues to another repo- [#3268](https://github.com/cli/cli/pull/3268) Merged 🎉
+- Built functionality of transfering issues from scratch - [#3268](https://github.com/cli/cli/pull/3268) Merged 🎉
 - Check if gist contents are empty - [#3578](https://github.com/cli/cli/pull/3578) Merged 🎉
 - Bug Fixes - [#3334](https://github.com/cli/cli/pull/3334), [#3021](https://github.com/cli/cli/pull/3021) Merged 🎉
 
