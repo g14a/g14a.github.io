@@ -11,6 +11,7 @@ order: 2
 - Added support to show diff stats in PRs directly in the command line - [#3086](https://github.com/cli/cli/pull/3086) - Merged 🎉
 - Added support to search issues with all filters - [#3196](https://github.com/cli/cli/pull/3196) Merged 🎉
 - Added support to transfer issues to another repo- [#3268](https://github.com/cli/cli/pull/3268) Merged 🎉
+- Check if gist contents are empty - [#3578](https://github.com/cli/cli/pull/3578) Merged 🎉
 - Bug Fixes - [#3334](https://github.com/cli/cli/pull/3334), [#3021](https://github.com/cli/cli/pull/3021) Merged 🎉
 
 To know more about my work experience, check out my LinkedIn in the bottom left!
@@ -24,5 +25,6 @@ Features
 - Run any type of upward and downward migrations
 - Run until a certain migration and stop at that point.
 - Pass a custom directory of migration scripts.
+- Store your migrations in your favourite databases (PostgreSQL and MongoDB supported for now)
 
 <img src="{{ site.baseurl }}/assets/gifs/demo.gif" width="700" height="550" />
