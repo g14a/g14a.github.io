@@ -21,11 +21,15 @@ To know more about my work experience, check out my LinkedIn in the bottom left!
 
 An abstract migration tool written in Go for Golang services.
 
+Checkout [https://g14a.github.io/metana](https://g14a.github.io/metana) for documentation
+
 Features
 
 - Run any type of upward and downward migrations
 - Run until a certain migration and stop at that point.
 - Pass a custom directory of migration scripts.
 - Store your migrations in your favourite databases (PostgreSQL and MongoDB supported for now)
+- Dry run migrations
+- Set custom config
 
 <img src="{{ site.baseurl }}/assets/gifs/demo.gif" width="700" height="550" />
