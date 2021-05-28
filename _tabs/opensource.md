@@ -12,8 +12,9 @@ order: 2
 - Added support to search issues with all filters - [#3196](https://github.com/cli/cli/pull/3196) Merged 🎉
 - Built functionality of transfering issues from scratch - [#3268](https://github.com/cli/cli/pull/3268) Merged 🎉
 - Check if gist contents are empty - [#3578](https://github.com/cli/cli/pull/3578) Merged 🎉
-- Add functionality to fork a repo into an organizatoin - [#3611](https://github.com/cli/cli/pull/3611) Merged 🎉
+- Add functionality to fork a repo into an organization - [#3611](https://github.com/cli/cli/pull/3611) Merged 🎉
 - Add column headers and extra columns in listing runs - [#3575](https://github.com/cli/cli/pull/3575) Merged 🎉
+- Fix bugs in listing PRs and Issues - [#3730](https://github.com/cli/cli/pull/3730) Merged 🎉
 - Bug Fixes - [#3334](https://github.com/cli/cli/pull/3334), [#3021](https://github.com/cli/cli/pull/3021) Merged 🎉
 
 To know more about my work experience, check out my LinkedIn in the bottom left!
