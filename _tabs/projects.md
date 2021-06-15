@@ -10,7 +10,7 @@ order: 2
 
     Github Link - [Gitsee](https://github.com/g14a/gitsee)
 
-    Github Link for the web app - [Fe-Gitsee](https://github.com/g14a/fe-gitsee)
+    Live on - [https://g14a.github.io/gitsee/](https://g14a.github.io/gitsee/)
 
     ![Imgur](https://imgur.com/tnc7TY4.jpg)
 
