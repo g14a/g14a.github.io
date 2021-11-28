@@ -1,5 +1,5 @@
 ---
-title: Revisiting Channels and Deadlocks in Go with a File crawler
+title: Channels and Deadlocks in Go with a File crawler
 author: g14a
 date: 2021-11-27 3:30:00 -0530
 categories: [tutorials]
