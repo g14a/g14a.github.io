@@ -256,7 +256,7 @@ Now the above program doesn't implement concurrency, its just plain functions an
 * We loop on each one of them.
 * Get entries of each directory, recursively call the `walkDirectory` function if an entry is a directory, else we interpret it as a file and increase the count and size.
 
-Let's test our program on a large directory like the Linux operating system source tree.
+Let's test our program on a large directory like the [Linux operating system source tree](https://github.com/torvalds/linux).
 
 The source contains 70k files and a total size of 5GB.
 
