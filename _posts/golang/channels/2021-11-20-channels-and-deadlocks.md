@@ -273,13 +273,13 @@ Huh! 2 seconds isn't that bad for almost 75k files. But it looks like we can opt
 Let's refactor our `walkDirectory` function and see how it looks.
 
 ```go
-func walkDirectory(dir string, n *sync.WaitGroup, fileSize chan<- int64) {
-    defer n.Done()
+func walkDirectory(dir string, wg *sync.WaitGroup, fileSize chan<- int64) {
+    defer wg.Done()
         for _, entry := range getEntries(dir) {
             if entry.IsDir() {
-                n.Add(1)
+                wg.Add(1)
                 subdir := filepath.Join(dir, entry.Name())
-                go walkDirectory(subdir, n, fileSize)
+                go walkDirectory(subdir, wg, fileSize)
             } else {
                 info, err := entry.Info()
                 if err != nil {
@@ -291,7 +291,7 @@ func walkDirectory(dir string, n *sync.WaitGroup, fileSize chan<- int64) {
 }
 ```
 
-We will be calling this function as a goroutine in the main function so we need to keep track of all of them. A `sync.WaitGroup` exists just for that purpose. So we add a `defer n.Done()` in the beginning in case we forget to decrement our counters in the end.
+We will be calling this function as a goroutine in the main function so we need to keep track of all of them. A `sync.WaitGroup` exists just for that purpose. So we add a `defer wg.Done()` in the beginning in case we forget to decrement our counters in the end.
 
 In our serial program we had a counter and it was incremented as and when we encountered a file. But here, we send each file info into a channel of type `int` on line 13. The reason we did this is simple. Every single value that goes into the channel means a file has been come across, because we don't calculate the size of the same file more than once.
 
@@ -310,14 +310,14 @@ func main() {
     now := time.Now()
 
     fileSizes := make(chan int64)
-    var n sync.WaitGroup
+    var wg sync.WaitGroup
 
     for _, root := range roots {
-        n.Add(1)
-        go walkDirectory(root, &n, fileSizes)
+        wg.Add(1)
+        go walkDirectory(root, &wg, fileSizes)
     }
 
-    n.Wait()
+    wg.Wait()
     close(fileSizes)
 
     var nFiles, nBytes int64
@@ -376,7 +376,7 @@ The main function becomes:
 ```go
 func main() {
 
-    flag.IntVar(&pool, "p", 1, "")
+    flag.IntVar(&maxConcurrency, "p", 1, "")
     flag.Parse()
 
     roots := flag.Args()
@@ -387,16 +387,16 @@ func main() {
     now := time.Now()
 
     fileSizes := make(chan int64)
-    var n sync.WaitGroup
+    var wg sync.WaitGroup
 
-    var sema = make(chan struct{}, pool)
+    var sema = make(chan struct{}, maxConcurrency)
 
     for _, root := range roots {
-        n.Add(1)
-        go walkDirectory(root, &n, fileSizes, sema)
+        wg.Add(1)
+        go walkDirectory(root, &wg, fileSizes, sema)
     }
 
-    n.Wait()
+    wg.Wait()
     close(fileSizes)
 
     var nFiles, nBytes int64
@@ -412,7 +412,7 @@ func main() {
 
 ```
 
-<span style="color:#FF02c4"><b>The reason we added a size to the channel on `line 16` is to allow `pool` number of files to be access by goroutines. It is also the reason why we did not pop empty structs from the channel in the `getEntries` function in a goroutine. Remember the portal example. Buffered channels don't act like portals. Only non-buffered channels do.</b></span>
+<span style="color:#FF02c4"><b>The reason we added a size to the channel on `line 16` is to allow `maxConcurrency` number of files to be access by goroutines. It is also the reason why we did not pop empty structs from the channel in the `getEntries` function in a goroutine. Remember the portal example. Buffered channels don't act like portals. Only non-buffered channels do.</b></span>
 
 Let's run this program by passing a value of 20 to the `-p` flag.
 
@@ -438,12 +438,12 @@ exit status 2
 
 Huh! Any idea why this is happening? 
 
-If we look at our `fileSizes` channel, we know its a non-buffered channel. Our waitgroup on line 23 expects all goroutines to continue and move on. But our non-buffered channel is a portal. For the `walkDirectory` goroutine to move on, it needs someone taking values out of the `fileSizes` channel. But we're reading from the channel after we `n.Wait()` and `close(fileSizes)`
+If we look at our `fileSizes` channel, we know its a non-buffered channel. Our waitgroup on line 23 expects all goroutines to continue and move on. But our non-buffered channel is a portal. For the `walkDirectory` goroutine to move on, it needs someone taking values out of the `fileSizes` channel. But we're reading from the channel after we `wg.Wait()` and `close(fileSizes)`
 
 Two things are happening here:
 
 * The goroutine doesn't move on to the next directory because channel is never read.
-* The values from channel are never read since the goroutine doesn't move on and decrement its counter(which is basically what `n.Wait()` wants).
+* The values from channel are never read since the goroutine doesn't move on and decrement its counter(which is basically what `wg.Wait()` wants).
 
 So we get a deadlock situation.
 
