@@ -16,6 +16,7 @@ order: 2
 - Add column headers and extra columns in listing runs - [#3575](https://github.com/cli/cli/pull/3575) Merged 🎉
 - Fix bugs in listing PRs and Issues - [#3730](https://github.com/cli/cli/pull/3730) Merged 🎉
 - Add feature to create repository with .gitignore and a license template - [#3746](https://github.com/cli/cli/pull/3746) Merged 🎉
+- Add the `repo edit` command - [#4318](https://github.com/cli/cli/pull/4318) Merged 🎉
 - Bug Fixes - [#3334](https://github.com/cli/cli/pull/3334), [#3021](https://github.com/cli/cli/pull/3021), [#3972](https://github.com/cli/cli/pull/3972) Merged 🎉
 
 To know more about my work experience, check out my LinkedIn in the bottom left!
