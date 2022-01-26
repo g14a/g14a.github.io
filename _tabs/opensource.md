@@ -17,6 +17,7 @@ order: 2
 - Fix bugs in listing PRs and Issues - [#3730](https://github.com/cli/cli/pull/3730) Merged 🎉
 - Add feature to create repository with .gitignore and a license template - [#3746](https://github.com/cli/cli/pull/3746) Merged 🎉
 - Add the `repo edit` command - [#4318](https://github.com/cli/cli/pull/4318) Merged 🎉
+- Add functionality to add a fork name to specify final name for a forked repo - [#4886](https://github.com/cli/cli/pull/4886) Merged 🎉
 - Bug Fixes - [#3334](https://github.com/cli/cli/pull/3334), [#3021](https://github.com/cli/cli/pull/3021), [#3972](https://github.com/cli/cli/pull/3972) Merged 🎉
 
 To know more about my work experience, check out my LinkedIn in the bottom left!
