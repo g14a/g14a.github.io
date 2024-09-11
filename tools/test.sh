@@ -12,7 +12,7 @@
 # MIT Licensed
 
 DEST=_site
-URL_IGNORE=cdn.jsdelivr.net
+URL_IGNORE="cdn.jsdelivr.net"
 
 _build=false
 
@@ -64,8 +64,9 @@ if $_build; then
   JEKYLL_ENV=production bundle exec jekyll b
 fi
 
+# Adjusted htmlproofer command to ignore URLs using a regular expression
 bundle exec htmlproofer "$DEST" \
   --disable-external \
   --check-html \
   --allow_hash_href \
-  --url-ignore $URL_IGNORE
+  --url-ignore "/cdn.jsdelivr.net/"
