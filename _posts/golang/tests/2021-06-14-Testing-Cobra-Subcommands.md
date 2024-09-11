@@ -285,7 +285,7 @@ tests := []struct {
 ```
 
 <p>
-    <img src="https://media.giphy.com/media/ue1GO5swPdORq/giphy.gif" width="430" height="250"/>
+    <img src="https://media.giphy.com/media/ue1GO5swPdORq/giphy.gif" width="430" height="250" alt=""/>
     <em>Oh yeah!</em>
 </p>
 

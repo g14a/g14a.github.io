@@ -131,7 +131,7 @@ This happens because there is no goroutine(the main func is also ultimately a go
 You can understand the above better by the following picture.
 
 <p>
-    <img src="../../images/channels/blockinggophers.png" width="60%">
+    <img src="../../images/channels/blockinggophers.png" width="60%" alt="">
     <em>Pic Credit: GopherCon UK</em>
 </p>
 

@@ -15,11 +15,11 @@ I come from a Java background. I've used them only for competitive programing wh
 
 I'll try my best to explain what interfaces in Go are, assuming you're five years old.
 
-<img src="https://media.giphy.com/media/WsNbxuFkLi3IuGI9NU/giphy-downsized.gif" width="300" height="250"/>
+<img src="https://media.giphy.com/media/WsNbxuFkLi3IuGI9NU/giphy-downsized.gif" width="300" height="250" alt=""/>
 
 Let's take an example of two things that float on water like oil and ice.
 
-<img src="../../images/golang-interfaces/oilwater.png" width="60%">
+<img src="../../images/golang-interfaces/oilwater.png" width="60%" alt="">
 
 Why do they float on water? You would probably say the following.
 
@@ -250,7 +250,7 @@ func UserHandler(w http.ResponseWriter, r *http.Request)  {
 
 If you closely observe, we removed direct interaction between the HTTP handler and the database connections i.e decoupling the API layer and the data layer.
 
-<img src="../../images/golang-interfaces/beforeafterinterfaces.png" width="50%">
+<img src="../../images/golang-interfaces/beforeafterinterfaces.png" width="50%" alt="">
 
 ## When to use interfaces
 

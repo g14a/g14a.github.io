@@ -17,7 +17,7 @@ In the earlier section [Part -2](https://g14a.github.io/posts/using-Go-Channels-
 
 Have you ever thought of what would happen if you're on the receiver end of a channel and you accidentally close the channel? Or mistakenly try writing on a receiver end or reading from a sender end?
 
-<img src="https://media.giphy.com/media/wQzqIYHE15zMI/giphy.gif" width="340" height="250"/>
+<img src="https://media.giphy.com/media/wQzqIYHE15zMI/giphy.gif" width="340" height="250" alt=""/>
 
 To avoid these accidental errors, channels provide a better syntax to indicate whether a channel is just for reading or writing.
 
@@ -357,7 +357,7 @@ $ >
 The control flow can be understood better by the following picture.
 
 <p>
-    <img src="../../images/channels/select.png" width="60%">
+    <img src="../../images/channels/select.png" width="60%" alt="">
 </p>
 
 ## **Timeouts in channels**

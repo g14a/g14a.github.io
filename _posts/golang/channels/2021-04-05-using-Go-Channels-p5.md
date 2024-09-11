@@ -14,7 +14,7 @@ In the earlier section [Part - 4](https://g14a.github.io/posts/using-Go-Channels
 Now let us see if we can make our parallel version even better.
 
 <p>
-    <img src="https://media.giphy.com/media/11zU4IDJeg75Sg/giphy.gif" width="430" height="250"/>
+    <img src="https://media.giphy.com/media/11zU4IDJeg75Sg/giphy.gif" width="430" height="250" alt=""/>
     <em>Hope you're as excited as Kevin!</em>
 </p>
 
@@ -110,7 +110,7 @@ This looks a lot better. We have come down from `3m34s` from the earlier section
 Let's add `pprof` to our Go program and see the memory profile by running it again and check the flame graph.
 
 <p>
-    <img src="../../images/channels/memprof.png" width="100%">
+    <img src="../../images/channels/memprof.png" width="100%" alt="">
 </p>
 
 We observe the following from the graph and our code in general:

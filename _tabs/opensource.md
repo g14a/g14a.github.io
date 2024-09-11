@@ -41,4 +41,4 @@ Features
 - Wipe out stale migration files and refresh your track
 
 
-<img src="{{ site.baseurl }}/assets/gifs/demo.gif" width="700" height="550" />
+<img src="{{ site.baseurl }}/assets/gifs/demo.gif" width="700" height="550" alt="" />

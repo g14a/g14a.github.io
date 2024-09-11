@@ -8,7 +8,7 @@ toc: true
 ---
 
 <p>
-    <img src="https://media.giphy.com/media/EbRPam1A4jEWkUokL8/giphy.gif" width="250" height="250"/>
+    <img src="https://media.giphy.com/media/EbRPam1A4jEWkUokL8/giphy.gif" width="250" height="250" alt=""/>
 </p>
 
 Welcome back! We've seen in the earlier sections that channels can be used to improve and control concurrency in Golang. But let's look at it again with a fresh mind. Let's unlearn things and re-learn them again.
@@ -348,7 +348,7 @@ exit status 2
 ```
 
 <p>
-    <img src="https://media.giphy.com/media/e1s8C0YnnfjlRf7mEr/giphy.gif" width="430" height="250"/>
+    <img src="https://media.giphy.com/media/e1s8C0YnnfjlRf7mEr/giphy.gif" width="430" height="250" alt=""/>
 </p>
 
 The reason this happens in we're concurrently accessing a lot of files which was past our `open file descriptor limit`. So we don't want to do that. Neither do we want to increase our maximum limit to really 75k files. 
@@ -481,7 +481,7 @@ total time:  177.577326ms
 We made it around 16 times faster than the serial version!
 
 <p>
-    <img src="https://media.giphy.com/media/l0amJzVHIAfl7jMDos/giphy.gif" width="430" height="380"/>
+    <img src="https://media.giphy.com/media/l0amJzVHIAfl7jMDos/giphy.gif" width="430" height="380" alt=""/>
     <em>By now you can tell that I'm an Office fan.</em>
 </p>
 
