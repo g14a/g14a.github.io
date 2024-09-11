@@ -4,6 +4,12 @@ icon: fas fa-info
 order: 2
 ---
 
+* ## **BizBrief - A Business News Aggregator - Aug 2024**
+
+    A financial news aggregator that scrapes the internet and brings the latest business and market related news to the user.
+
+    Live on - [BizBrief.in](https://bizbrief.in)
+
 * ## **Gitsee - A Github Visualization Tool - Aug 2020**
 
     The backend service for a Github Visualization tool made for fun, but can be used to get an overview of a candidate's Github repos during a hiring process. 
