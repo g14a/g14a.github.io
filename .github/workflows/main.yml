@@ -25,7 +25,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7'  # Specify your Ruby version here
+          ruby-version: '3.1'  # Specify your Ruby version here
           bundler-cache: true  # Automatically handles bundle caching
 
       - name: Bundle Install
